@@ -1,4 +1,4 @@
 # API Demo
 
-Demo example of APIs
+Demo example of creation of APIs in Laravel
 
