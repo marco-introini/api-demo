@@ -1,0 +1,100 @@
+//@name Get all Users
+GET {{HOST}}/api/users
+
+###
+
+//@name Insert an user
+POST {{HOST}}/api/users
+Content-Type: application/json
+
+{
+	"name": "Test",
+	"email": "test@example.com",
+	"password": "prova1234",
+	"password_confirmation": "prova1234"
+}
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+
+    client.test("Response content-type is json", function() {
+        var type = response.contentType.mimeType;
+        client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
+    });
+
+    client.test("Returned ID", function() {
+        var userID = response.body.data.id.toString();
+        client.log("ID: " + userID);
+        client.assert( userID !== "", "Expected ID in response JSON");
+    });
+
+    client.global.set("userID", response.body.data.id.toString());
+
+%}
+
+###
+//@name Update User
+PUT {{HOST}}/api/users/{{userID}}
+Content-Type: application/json
+
+{
+  "name": "New Test",
+  "email": "test@example.com",
+  "password": "prova1234",
+  "password_confirmation": "prova1234"
+}
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    client.test("Response content-type is json", function() {
+        var type = response.contentType.mimeType;
+        client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
+    });
+
+    client.test("Returned updated data", function() {
+        var name = response.body.data.name.toString();
+        client.log("name: " + name);
+        client.assert( name === "New Test", "Expected new name in response JSON");
+    });
+
+%}
+
+###
+
+//@name Retrieve inserted user
+GET {{HOST}}/api/users/{{userID}}
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+
+    client.test("Response content-type is json", function() {
+        var type = response.contentType.mimeType;
+        client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
+    });
+
+    client.test("Returned ID", function() {
+        var userID = response.body.data.id.toString();
+        client.log("ID: " + userID);
+        client.assert( userID !== "", "Expected ID in response JSON");
+    });
+
+%}
+
+###
+
+//@name Delete inserted user
+DELETE {{HOST}}/api/users/{{userID}}
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 204, "Response status is not 204");
+    });
+
+%}
