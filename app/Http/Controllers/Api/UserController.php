@@ -46,6 +46,7 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        return $user->delete();
+        $user->delete();
+        return response()->json(null, 204);
     }
 }
