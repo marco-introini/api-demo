@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\RegisterController;
 
 // complete usage of resource
 Route::apiResource('users', UserController::class);
@@ -18,6 +19,13 @@ Route::prefix('users2')
         Route::delete('/',[UserController::class,'delete'])->name('delete');
     });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::controller(RegisterController::class)->group(function(){
+    Route::post('register', 'register');
+    Route::post('login', 'login');
+});
+
+Route::middleware('auth:sanctum')->get('/sanctum/user', function (Request $request) {
+    // user is taken from the bearer token
     return $request->user();
 });
+
