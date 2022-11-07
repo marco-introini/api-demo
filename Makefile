@@ -38,7 +38,7 @@ update:
 	php artisan route:clear
 	php artisan view:clear
 	php artisan livewire:discover
-	php artisan filament:upgrade
+	#php artisan filament:upgrade
 	@echo "UPDATED Laravel Version"
 	php artisan --version
 
