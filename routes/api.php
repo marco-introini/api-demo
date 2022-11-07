@@ -34,7 +34,7 @@ Route::prefix('sanctum')->group(function () {
     Route::get('user', function (Request $request) {
         // user is taken from the bearer token
         return $request->user();
-    })->middleware('auth:sanctum');
+    })->middleware('auth:sanctum')->name('sanctum-user');
     Route::get('users', [UserController::class, 'index'])->middleware('auth:sanctum');
 });
 

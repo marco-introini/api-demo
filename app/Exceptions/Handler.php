@@ -7,6 +7,19 @@ use Throwable;
 
 class Handler extends ExceptionHandler
 {
+
+    /**
+     * Determine if the exception handler response should be JSON.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Throwable  $e
+     * @return bool
+     */
+    protected function shouldReturnJson($request, Throwable $e)
+    {
+        return true;
+    }
+
     /**
      * A list of exception types with their corresponding custom log levels.
      *
