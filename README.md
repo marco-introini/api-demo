@@ -19,4 +19,14 @@ See the third part in api.php and:
 
 The base response is in the Http/Traits/BaseApiResponse.php
 
+## API documentation
 
+This project uses Scribe: https://scribe.knuckles.wtf/laravel
+
+To generate blade docs use:
+
+```
+php artisan scribe:generate
+```
+
+and see /docs route
