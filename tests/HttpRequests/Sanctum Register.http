@@ -1,0 +1,41 @@
+//@name Registration failure
+POST {{HOST}}/api/register
+Content-Type: application/json
+
+{
+  "email": "mint.dev@pm.me",
+  "password": "password"
+}
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 401, "Response status is not 401");
+    });
+
+%}
+
+###
+
+//@name Registration success
+POST {{HOST}}/api/register
+Content-Type: application/json
+
+{
+  "email": "mint@pm.me",
+  "name": "admin",
+  "password": "password",
+  "password_confirmation": "password"
+}
+
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+    client.test("Returned my admin name", function() {
+        var name = response.body.data.name.toString();
+        client.log("name: " + name);
+        client.assert( name === "admin", "admin username is not correct");
+    });
+
+%}

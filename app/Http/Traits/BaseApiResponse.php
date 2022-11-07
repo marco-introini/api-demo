@@ -2,40 +2,30 @@
 
 namespace App\Http\Traits;
 
+use Illuminate\Http\JsonResponse;
+
 trait BaseApiResponse
 {
-    /**
-     * success response method.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function sendResponse($result, $message)
+    public function sendSuccessResponse(array $data, string $message = null, int $code = 200): JsonResponse
     {
-        $response = [
-            'success' => true,
-            'data'    => $result,
+        return response()->json([
+            'status' => "Request was successful",
             'message' => $message,
-        ];
-
-        return response()->json($response, 200);
+            'data' => $data
+        ], $code);
     }
 
     /**
      * return error response.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function sendError($error, $errorMessages = [], $code = 404)
+    public function sendErrorResponse(array $data, string $message = null, $code = 404): JsonResponse
     {
-        $response = [
-            'success' => false,
-            'message' => $error,
-        ];
-
-        if(!empty($errorMessages)){
-            $response['data'] = $errorMessages;
-        }
-
-        return response()->json($response, $code);
+        return response()->json([
+            'status' => "An error has occurred",
+            'message' => $message,
+            'data' => $data
+        ], $code);
     }
 }
