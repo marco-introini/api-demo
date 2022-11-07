@@ -25,10 +25,9 @@ Route::prefix('users2')
 // THIRD: USE SANCTUM
 // registration
 Route::controller(RegisterController::class)->group(function(){
-    Route::post('register', 'register');
-    Route::post('login', 'login');
+    Route::post('sanctum/register', 'register');
+    Route::post('sanctum/login', 'login');
 });
-
 
 // usage
 Route::middleware('auth:sanctum')->get('/sanctum/user', function (Request $request) {

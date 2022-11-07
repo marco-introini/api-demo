@@ -1,5 +1,5 @@
 //@name Get Bearer Token
-POST {{HOST}}/api/login
+POST {{HOST}}/api/sanctum/login
 Content-Type: application/json
 
 {
