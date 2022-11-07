@@ -1,11 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Traits;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller as Controller;
-
-class BaseController extends Controller
+trait BaseApiResponse
 {
     /**
      * success response method.

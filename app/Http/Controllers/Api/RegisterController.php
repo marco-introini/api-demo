@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use App\Http\Traits\BaseApiResponse;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Api\BaseController as BaseController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Validator;
 
-class RegisterController extends BaseController
+class RegisterController extends Controller
 {
+    use BaseApiResponse;
+
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -24,9 +28,9 @@ class RegisterController extends BaseController
         }
 
         $input = $request->all();
-        $input['password'] = bcrypt($input['password']);
+        $input['password'] = Hash::make($input['password']);
         $user = User::create($input);
-        $success['token'] = $user->createToken('MyApp')->plainTextToken;
+        $success['token'] = $user->createToken('Token for user '.$user->name)->plainTextToken;
         $success['name'] = $user->name;
 
         return $this->sendResponse($success, 'User register successfully.');
