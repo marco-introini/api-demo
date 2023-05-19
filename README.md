@@ -23,7 +23,7 @@ The base response is in the Http/Traits/BaseApiResponse.php
 
 This project uses Scribe: https://scribe.knuckles.wtf/laravel
 
-To generate blade docs use:
+To generate html docs use:
 
 ```
 php artisan scribe:generate
