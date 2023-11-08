@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\JWTController;
 
 // FIRST: USE APICONTROLLER
 // complete usage of resource
@@ -34,6 +35,11 @@ Route::prefix('sanctum')->group(function () {
         return $request->user();
     })->middleware('auth:sanctum')->name('sanctum-user');
     Route::get('users', [UserController::class, 'index'])->middleware('auth:sanctum');
+});
+
+// FORTH: USE JWTController
+Route::prefix('jwt')->group(function () {
+    Route::get('check', JWTController::class);
 });
 
 

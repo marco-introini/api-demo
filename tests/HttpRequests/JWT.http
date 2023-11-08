@@ -1,0 +1,5 @@
+//@name Get all Users
+GET {{HOST}}/api/jwt/check
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlBPTEFSSVMiLCJpYXQiOjE1MTYyMzkwMjJ9.uG-V4kLN74CxDKxSlHSydQjXvk2qdANK3FCak-RDBHg
+
+
