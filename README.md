@@ -19,6 +19,10 @@ See the third part in api.php and:
 
 The base response is in the Http/Traits/BaseApiResponse.php
 
+## JWT Tokens
+
+
+
 ## API documentation
 
 This project uses Scribe: https://scribe.knuckles.wtf/laravel
