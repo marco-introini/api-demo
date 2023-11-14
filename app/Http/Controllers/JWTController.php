@@ -16,10 +16,16 @@ class JWTController extends Controller
 
         try {
             $decoded = JWT::decode($token, new Key(config('jwt.JWT_SECRET'), 'HS256'));
-            return response()->json($decoded);
+            return response()->json([
+                'status' => 'success',
+                'decoded_payload' => $decoded,
+            ]);
         }
         catch (Exception $e){
-            return response(json_encode(['Error' => $e->getMessage()]),status: 401);
+            return response(json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ]),status: 401);
         }
 
     }
