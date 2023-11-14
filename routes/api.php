@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\JWTAuthController;
 use App\Http\Controllers\JWTController;
+use Illuminate\Http\Request;
 
 // FIRST: USE APICONTROLLER
 // complete usage of resource
@@ -33,12 +34,16 @@ Route::prefix('sanctum')->group(function () {
     // get current user info
     Route::get('user', function (Request $request) {
         // user is taken from the bearer token
+        ray($request);
         return $request->user();
-    })->middleware('auth:sanctum')->name('sanctum-user');
-    Route::get('users', [UserController::class, 'index'])->middleware('auth:sanctum');
+    })  ->middleware('auth:sanctum')
+        ->name('sanctum.user');
+
+    Route::get('users', [UserController::class, 'index'])
+        ->middleware('auth:sanctum')->name('sanctum.users');
 });
 
-// FORTH: USE JWTController
+// FORTH: USE JWT
 Route::prefix('jwt')->group(function () {
     Route::post('login', JWTAuthController::class)->name('jwt.login');
 

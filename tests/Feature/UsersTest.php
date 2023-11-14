@@ -1,9 +1,6 @@
 <?php
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
-
-uses(RefreshDatabase::class);
 
 it('can get all users', function () {
 
