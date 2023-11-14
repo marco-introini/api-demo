@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\JWTAuthController;
 use App\Http\Controllers\JWTController;
 
 // FIRST: USE APICONTROLLER
@@ -39,7 +40,9 @@ Route::prefix('sanctum')->group(function () {
 
 // FORTH: USE JWTController
 Route::prefix('jwt')->group(function () {
-    Route::get('check', JWTController::class);
+    Route::post('login', JWTAuthController::class)->name('jwt.login');
+
+    Route::get('check', JWTController::class)->name('jwt.check');
 });
 
 

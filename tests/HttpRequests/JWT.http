@@ -1,4 +1,15 @@
-//@name Get all Users
+//@name JWT Login
+POST {{HOST}}/api/jwt/login
+Content-Type: application/json
+
+{
+  "email": "mint.dev@pm.me",
+  "password": "password"
+}
+
+###
+
+//@name Check JWT
 GET {{HOST}}/api/jwt/check
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlBPTEFSSVMiLCJpYXQiOjE1MTYyMzkwMjJ9.uG-V4kLN74CxDKxSlHSydQjXvk2qdANK3FCak-RDBHg
 

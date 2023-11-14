@@ -12,12 +12,10 @@ class JWTController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $token = str($request->header('Authorization'))
-            ->replace('Bearer','',)
-            ->remove(" ");
+        $token = preg_replace('/^Bearer\s*/', '', $request->header('Authorization'));
 
         try {
-            $decoded = JWT::decode($token, new Key(env('JWT_SECRET'), 'HS256'));
+            $decoded = JWT::decode($token, new Key(config('jwt.JWT_SECRET'), 'HS256'));
             return response()->json($decoded);
         }
         catch (Exception $e){

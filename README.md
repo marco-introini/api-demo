@@ -23,7 +23,8 @@ The base response is in the Http/Traits/BaseApiResponse.php
 
 This demo project uses PHP-JWT: https://github.com/firebase/php-jwt
 
-See the JWTController for this example.
+- JWTAuthController is a JWT Authetication and JWT token generator
+- JWTController is a client JWT
 
 ## API documentation
 
