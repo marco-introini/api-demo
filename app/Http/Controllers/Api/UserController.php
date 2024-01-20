@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-
     public function index()
     {
         return UserResource::collection(User::paginate(5));
@@ -47,6 +46,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+
         return response()->json(null, 204);
     }
 }

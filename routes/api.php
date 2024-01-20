@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\JWTAuthController;
 use App\Http\Controllers\JWTController;
 use Illuminate\Http\Request;
@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 // FIRST: USE APICONTROLLER
 // complete usage of resource
 Route::apiResource('users', UserController::class);
-
 
 // SECOND: ROUTE SINGLE METHODS
 // it's possible to fine tune endpoints in this way:
@@ -35,8 +34,9 @@ Route::prefix('sanctum')->group(function () {
     Route::get('user', function (Request $request) {
         // user is taken from the bearer token
         ray($request);
+
         return $request->user();
-    })  ->middleware('auth:sanctum')
+    })->middleware('auth:sanctum')
         ->name('sanctum.user');
 
     Route::get('users', [UserController::class, 'index'])
@@ -49,8 +49,3 @@ Route::prefix('jwt')->group(function () {
 
     Route::get('check', JWTController::class)->name('jwt.check');
 });
-
-
-
-
-

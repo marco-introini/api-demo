@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\BaseApiResponse;
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -19,19 +19,19 @@ class RegisterController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => ['required','email',Rule::unique('users','email')],
-            'password' => ['required','confirmed'],
+            'email' => ['required', 'email', Rule::unique('users', 'email')],
+            'password' => ['required', 'confirmed'],
         ]);
 
         if ($validator->fails()) {
-            return $this->sendErrorResponse( $validator->errors()->toArray(),"Validation error",401);
+            return $this->sendErrorResponse($validator->errors()->toArray(), 'Validation error', 401);
         }
 
         $user = User::create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
-            'password' => Hash::make($request->get('password'))
-            ]);
+            'password' => Hash::make($request->get('password')),
+        ]);
 
         $success['token'] = $user->createToken('Token for user '.$user->name)->plainTextToken;
         $success['name'] = $user->name;
@@ -50,7 +50,7 @@ class RegisterController extends Controller
 
             return $this->sendSuccessResponse($success, 'User login successfully.');
         } else {
-            return $this->sendErrorResponse( ['error' => 'Unauthorized'], 'User unauthorized', 403);
+            return $this->sendErrorResponse(['error' => 'Unauthorized'], 'User unauthorized', 403);
         }
     }
 }
